@@ -44,11 +44,9 @@ public class Database {
     }
 
     private static void writeScoresToFile(Context context){
-        
-        File f = new File(context.getFilesDir(), "file.txt");
         try
         {
-            File score_file = new File(f, "scores.txt);
+            File score_file = new File(context.getFilesDir(), "scores.txt);
             FileWriter writer = new FileWriter(score_file);
             for(HighScore hs : highScores){
                 writer.append(hs.getName() + "\t");
