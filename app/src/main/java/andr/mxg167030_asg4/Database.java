@@ -43,15 +43,18 @@ public class Database {
         return list;
     }
 
-    private static void writeScoresToFile(Context context){
+    private static void writeScoresToFile(Context context)
+    {
         try
         {
-            File score_file = new File(context.getFilesDir(), "scores.txt);
-            FileWriter writer = new FileWriter(score_file);
-            for(HighScore hs : highScores){
-                writer.append(hs.getName() + "\t");
-                writer.append(dateFormat.format(hs.getDate()) + "\t");
-                writer.append(hs.getScore() + "\n");
+            FileOutputStream score_file = context.openFileOutput("scores.txt", Context.MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(score_file); 
+
+            for(HighScore hs : highScores)
+            {
+                writer.write(hs.getName() + "\t");
+                writer.write(dateFormat.format(hs.getDate()) + "\t");
+                writer.write(hs.getScore() + "\n");
             }
             writer.flush();
             writer.close();
@@ -60,8 +63,6 @@ public class Database {
         {
             //TODO: something something handle
         }
-
-
     }
 
     private static void readScoresFromFile(Context context) throws FileNotFoundException {
