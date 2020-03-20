@@ -44,23 +44,25 @@ public class Database {
     }
 
     private static void writeScoresToFile(Context context){
-        FileOutputStream fileOutputStream = new FileOutputStream()
-        PrintWriter scores = null;
-
+        
+        File f = new File(context.getFilesDir(), "file.txt");
         try
         {
-            scores_file = new File(context.getFilesDir(), strScorefile);
-            scores = new PrintWriter(scores_file);
+            File score_file = new File(f, "scores.txt);
+            FileWriter writer = new FileWriter(score_file);
             for(HighScore hs : highScores){
-                scores.print(hs.getName() + "\t");
-                scores.print(dateFormat.format(hs.getDate()) + "\t");
-                scores.println(hs.getScore());
+                writer.append(hs.getName() + "\t");
+                writer.append(dateFormat.format(hs.getDate()) + "\t");
+                writer.append(hs.getScore() + "\n");
             }
+            writer.flush();
+            writer.close();
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            //TODO: Handle the error.
+            //TODO: something something handle
         }
+
 
     }
 
